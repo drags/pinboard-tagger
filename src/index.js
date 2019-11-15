@@ -28,9 +28,8 @@ class Login extends React.Component {
     super(props);
     this.state = {
       username: "",
-      password: "",
       token: "",
-      errorMsg: "",
+      loginToast: "",
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -48,30 +47,24 @@ class Login extends React.Component {
   }
 
   handleSubmit(event) {
-    // TODO: handle case where neither password/token given
-    //
     // submit login form with axios
     //  if 200
     //      api will create its own session cookie, change isLoggedIn and re-render
     //  else
     //      bitch in login form
     event.preventDefault()
-    if (this.state.password === "" && this.state.token === "") {
+    if (this.state.username === "" || this.state.token === "") {
       this.setState({
-        errorMsg: "You must provide either a password or token"
+        loginToast: "Username and Token are required."
       });
       return;
     }
-    this.setState({
-      errorMsg: ""
-    });
 
     const params = new URLSearchParams();
     params.append('username', this.state.username)
-    params.append('password', this.state.password)
     params.append('token', this.state.token)
     console.log("Params")
-    params.forEach(function(v,k) {console.log(k,v)})
+    params.forEach((v,k) => {console.log(k,v)})
     console.log(params.values())
 
     Axios.post("http://localhost:4567/login",
@@ -87,14 +80,19 @@ class Login extends React.Component {
     return(
       <div class="login">
         <form onSubmit={this.handleSubmit}>
-          <label>
-            <span class="login-toast">{this.state.errorMsg}</span> <br />
-            Username: <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/> <br />
-            Password: <input name="password" type="text" value={this.state.password} onChange={this.handleChange}/> <br />
-            Or <br />
-            Token: <input name="token" type="text" value={this.state.token} onChange={this.handleChange}/> <br />
+          <span class="login-toast">{this.state.loginToast}</span>
+          <p>
+            <label>Username:</label>
+            <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
+          </p>
+          <p>
+            <label>Token:</label>
+            <input name="token" type="text" value={this.state.token} onChange={this.handleChange}/>
+          </p>
+          <p>
+            <label></label>
             <input type="submit" value="login" />
-          </label>
+          </p>
         </form>
       </div>
     )

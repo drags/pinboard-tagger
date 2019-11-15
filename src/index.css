@@ -1,5 +1,6 @@
 body {
     font-family: helvetica;
+    color: #070;
 }
 
 .tagger {
@@ -7,15 +8,31 @@ body {
     margin: 20px auto 0;
     padding: 20px;
     height: 600px;
-    color: #070;
     border: 1px solid #000;
 }
 
 .login {
-    width: 500px;
+    width: 300px;
     margin: 200px auto;
 }
 
 .login-toast {
     color: #c00;
+}
+
+form {
+    display: table;
+}
+
+p {
+    display: table-row;
+}
+
+label {
+    display: table-cell;
+    text-align: right;
+}
+
+input {
+    display: table-cell;
 }
