@@ -12,27 +12,28 @@ body {
 }
 
 .login {
-    width: 300px;
     margin: 200px auto;
+    text-align: center;
 }
 
 .login-toast {
     color: #c00;
 }
 
-form {
+.login form {
     display: table;
+    margin: 0 auto;
 }
 
-p {
+.login p {
     display: table-row;
 }
 
-label {
+.login label {
     display: table-cell;
     text-align: right;
 }
 
-input {
+.login input {
     display: table-cell;
 }
