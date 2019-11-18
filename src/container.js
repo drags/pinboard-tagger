@@ -56,7 +56,7 @@ class Container extends React.Component {
 
   render() {
     return(
-      <div class="container">
+      <div className="container">
         {this.renderTagger()}
       </div>
     )

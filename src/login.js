@@ -47,7 +47,7 @@ class Login extends React.Component {
 
   render() {
     return(
-      <div class="login">
+      <div className="login">
         <form onSubmit={this.handleSubmit}>
           <p>
           </p>
@@ -65,7 +65,7 @@ class Login extends React.Component {
           </p>
         </form>
         <br />
-        <span class="login-toast">{this.state.loginToast}</span>
+        <span className="login-toast">{this.state.loginToast}</span>
       </div>
     )
   }
