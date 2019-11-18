@@ -1,60 +1,30 @@
 import React from 'react';
-import Login from './login.js';
-import TaggerApp from './tagger-app.js';
+
 
 class Tagger extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
-      username: "",
-      token: "",
+      hello: "there",
+      filterTags: [],
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleLoginChange = this.handleLoginChange.bind(this)
   }
 
-  handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
+  getPosts(props) {
   }
 
-  handleLoginChange(loggedIn) {
-    this.setState({
-      loggedIn: loggedIn
-    });
+  tagPost(props) {
   }
 
-  renderTagger(props) {
-    if (this.state.loggedIn) {
-      return(
-        <TaggerApp />
-      );
-    } else {
-      return(
-        <Login
-          handleChange={this.handleChange}
-          handleLoginChange={this.handleLoginChange}
-          username={this.state.username}
-          token={this.state.token}
-        />
-      );
-    }
+  nextPost(props) {
+  }
+
+  prevPost(props) {
   }
 
   render() {
-    return(
-      <div class="tagger">
-        {this.renderTagger()}
-      </div>
-    )
+    return("Hooray!")
   }
 }
-
 
 export default Tagger;

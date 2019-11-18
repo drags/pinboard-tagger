@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Tagger from './tagger.js';
+import Container from './container.js';
 
-
-ReactDOM.render(<Tagger />, document.getElementById('root'));
+ReactDOM.render(<Container />, document.getElementById('root'));
