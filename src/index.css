@@ -8,7 +8,6 @@ body {
     margin: 20px auto 0;
     padding: 20px;
     height: 600px;
-    border: 1px solid #000;
 }
 
 .login {
@@ -36,4 +35,29 @@ body {
 
 .login input {
     display: table-cell;
+}
+
+.post-description {
+    padding: 10px;
+    margin: 10px 0px;
+}
+
+.post-tag {
+    margin: 10px;
+    padding: 8px 16px;
+    color: #ddd;
+    background-color: #777;
+}
+
+.post-controls {
+    padding: 10px;
+}
+
+.post-controls button {
+    border: none;
+    display: inline-block;
+    background-color: #009688;
+    vertical-align: middle;
+    padding: 8px 16px;
+    margin: 0 10px;
 }
