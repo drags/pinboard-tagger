@@ -1,5 +1,4 @@
 import React from 'react';
-import Axios from 'axios';
 
 class Login extends React.Component {
   constructor(props) {
@@ -13,21 +12,19 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    if (this.state.username === "" || this.state.token === "") {
+
+    const axios = this.props.axios;
+
+    if (this.props.username === "" || this.props.token === "") {
       this.setState({
         loginToast: "Username and Token are required."
       });
       return;
     }
 
-    const params = new URLSearchParams();
-    params.append('username', this.props.username)
-    params.append('token', this.props.token)
-    params.forEach((v,k) => {console.log(k,v)})
+    axios.defaults.headers.common['Pinboard-Auth'] = this.props.username + ":" + this.props.token;
 
-    Axios.post("http://localhost:4567/login",
-      params,
-    )
+    axios.get("/auth/test")
     .then((res) => {
       this.setState({
         loginToast: "Success"

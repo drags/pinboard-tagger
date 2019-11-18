@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './login.js';
 import Tagger from './tagger.js';
+import Axios from 'axios';
 
 class Container extends React.Component {
   constructor(props) {
@@ -9,6 +10,9 @@ class Container extends React.Component {
       loggedIn: false,
       username: "",
       token: "",
+      axios: Axios.create({
+        baseURL: "http://localhost:4567/",
+      }),
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleLoginChange = this.handleLoginChange.bind(this)
@@ -33,7 +37,9 @@ class Container extends React.Component {
   renderTagger(props) {
     if (this.state.loggedIn) {
       return(
-        <Tagger />
+        <Tagger
+          axios={this.state.axios}
+        />
       );
     } else {
       return(
@@ -42,6 +48,7 @@ class Container extends React.Component {
           handleLoginChange={this.handleLoginChange}
           username={this.state.username}
           token={this.state.token}
+          axios={this.state.axios}
         />
       );
     }
