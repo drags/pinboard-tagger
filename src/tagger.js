@@ -10,8 +10,12 @@ class Tagger extends React.Component {
       taggerToast: "",
       filterTags: [],
       posts: [],
+      currentPost: 0,
       isLoaded: false,
     }
+
+    this.nextPost = this.nextPost.bind(this)
+    this.prevPost = this.prevPost.bind(this)
   }
 
   componentDidMount() {
@@ -39,10 +43,20 @@ class Tagger extends React.Component {
   updatePost(props) {
   }
 
-  nextPost(props) {
+  nextPost() {
+    if (this.state.currentPost < (this.state.posts.length - 1)) {
+      this.setState({
+        currentPost: this.state.currentPost + 1,
+      })
+    }
   }
 
-  prevPost(props) {
+  prevPost() {
+    if (this.state.currentPost > 0) {
+      this.setState({
+        currentPost: this.state.currentPost - 1,
+      })
+    }
   }
 
   render() {
@@ -50,9 +64,14 @@ class Tagger extends React.Component {
       return(
         <div id="tagger">
           <Post
-            post={this.state.posts[0]}
+            post={this.state.posts[this.state.currentPost]}
           />
-          <Controls  />
+        <br />
+        <br />
+          <Controls
+            nextPost={this.nextPost}
+            prevPost={this.prevPost}
+          />
         </div>
       )
     } else {

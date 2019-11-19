@@ -3,9 +3,9 @@ import React from 'react';
 function Controls(props) {
   return(
     <div className="post-controls">
-      <button>&lt;- Prev</button>
+      <button onClick={props.prevPost}>Prev</button>
       Some stuff ought to go here
-      <button>Next -&gt;</button>
+      <button onClick={props.nextPost}>Next</button>
     </div>
   )
 }
