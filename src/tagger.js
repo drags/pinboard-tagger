@@ -14,6 +14,8 @@ class Tagger extends React.Component {
       isLoaded: false,
     }
 
+    this.addTag = this.addTag.bind(this)
+    this.deleteTag = this.deleteTag.bind(this)
     this.nextPost = this.nextPost.bind(this)
     this.prevPost = this.prevPost.bind(this)
   }
@@ -40,7 +42,53 @@ class Tagger extends React.Component {
     });
   }
 
-  updatePost(props) {
+  deleteTag(tag) {
+    const post = this.state.posts[this.state.currentPost]
+    const axios = this.props.axios
+    const params = new URLSearchParams()
+    params.append("url", post.Url)
+    params.append("tag", tag)
+    axios.post('/posts/deleteTag', params)
+      .then((res) => {
+        console.log("Deleted tag " + tag + " from URL:" + post.Url)
+
+        const posts = this.state.posts
+
+        // Delete tag from local state
+        post.Tags = post.Tags.filter((t) => {return t !== tag})
+        posts[this.state.currentPost] = post
+        this.setState({
+          posts: posts,
+          taggerToast: "Deleted tag: " + tag,
+        })
+      })
+      .catch((error) => {
+        console.log("Error deleting tag " + tag + " from URL:" + post.Url + ". Error:" + error.message)
+        this.setState({
+          taggerToast: "Failed to delete tag: " + tag,
+        })
+      });
+  }
+
+  addTag(tag) {
+    const post = this.state.posts[this.state.currentPost]
+    const axios = this.props.axios
+    const params = new URLSearchParams()
+    params.append("url", post.Url)
+    params.append("tag", tag)
+    axios.post('/posts/addTag', params)
+      .then((res) => {
+        console.log("Added tag " + tag + " to URL:" + post.Url)
+        this.setState({
+          taggerToast: "Added tag: " + tag,
+        })
+      })
+      .catch((error) => {
+        console.log("Error adding tag " + tag + " to URL:" + post.Url + ". Error:" + error.message)
+        this.setState({
+          taggerToast: "Failed to add tag: " + tag,
+        })
+      });
   }
 
   nextPost() {
@@ -65,6 +113,8 @@ class Tagger extends React.Component {
         <div id="tagger">
           <Post
             post={this.state.posts[this.state.currentPost]}
+            deleteTag={this.deleteTag}
+            addTag={this.addTag}
           />
         <br />
         <br />
