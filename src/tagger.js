@@ -145,7 +145,8 @@ class Tagger extends React.Component {
   }
 
   renderDateOptions() {
-    const dateOptions = this.state.postDates.map((pd, i) => {
+    const postDates = this.state.postDates.reverse()
+    const dateOptions = postDates.map((pd, i) => {
       return(<option key={i} value={i}>{pd.Date}</option>)
     })
     return dateOptions
