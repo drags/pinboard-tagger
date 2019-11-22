@@ -43,7 +43,7 @@ body {
 }
 
 .post {
-    margin: 0px auto 200px;
+    height: 200px;
 }
 
 .post a {
@@ -77,4 +77,8 @@ body {
     vertical-align: middle;
     padding: 8px 16px;
     margin: 0 10px;
+}
+
+.tagger-toast {
+    color: #c00;
 }
