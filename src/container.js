@@ -35,13 +35,7 @@ class Container extends React.Component {
   }
 
   renderTagger(props) {
-    if (this.state.loggedIn) {
-      return(
-        <Tagger
-          axios={this.state.axios}
-        />
-      );
-    } else {
+    if (!this.state.loggedIn) {
       return(
         <Login
           handleChange={this.handleChange}
@@ -52,6 +46,11 @@ class Container extends React.Component {
         />
       );
     }
+    return(
+      <Tagger
+        axios={this.state.axios}
+      />
+    );
   }
 
   render() {

@@ -164,35 +164,35 @@ class Tagger extends React.Component {
   }
 
   render() {
-    if (this.state.isLoaded) {
-      return(
-        <div id="tagger">
-          Posts from: <select name="dateSelect" value={this.state.currentDate} onChange={this.handleDateChange}>
-            {this.renderDateOptions()}
-          </select>
-          <Post
-            post={this.state.posts[this.state.currentPost]}
-            deleteTag={this.deleteTag}
-            addTag={this.addTag}
-          />
-        <br />
-        <div>
-          <span className="tagger-toast">{this.state.taggerToast}</span>
-        </div>
-        <br />
-          <Controls
-            nextPost={this.nextPost}
-            prevPost={this.prevPost}
-          />
-        </div>
-      )
-    } else {
+    if (!this.state.isLoaded) {
       return(
         <div id="tagger">
           Loading...
         </div>
       )
     }
+    return(
+      <div id="tagger">
+        Posts from: <select name="dateSelect" value={this.state.currentDate} onChange={this.handleDateChange}>
+          {this.renderDateOptions()}
+        </select>
+        <Post
+          post={this.state.posts[this.state.currentPost]}
+          deleteTag={this.deleteTag}
+          addTag={this.addTag}
+          allTags={this.state.allTags}
+        />
+      <br />
+      <div>
+        <span className="tagger-toast">{this.state.taggerToast}</span>
+      </div>
+      <br />
+        <Controls
+          nextPost={this.nextPost}
+          prevPost={this.prevPost}
+        />
+      </div>
+    )
   }
 }
 
