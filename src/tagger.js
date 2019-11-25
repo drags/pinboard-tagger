@@ -11,7 +11,7 @@ class Tagger extends React.Component {
       untaggedOnly: false,
       posts: [],
       postDates: [],
-      tags: [],
+      allTags: [],
       currentPost: 0,
       currentDate: 0,
       isLoaded: false,
@@ -34,7 +34,7 @@ class Tagger extends React.Component {
       posts: posts.data,
       isLoaded: true,
     })
-    //this.getTags()
+    this.getTags()
   }
 
   getPostDates() {
@@ -52,6 +52,23 @@ class Tagger extends React.Component {
     .catch((error) => {
       this.setState({
         taggerToast: "Error fetching posts: " + error.message,
+      });
+    });
+  }
+
+  getTags() {
+    this.axios.get('/tags/get')
+    .then((res) => {
+      const tags = res.data
+      const allTags = tags.map(x => x.Tag)
+      console.log("Got a list of tags", allTags)
+      this.setState({
+        allTags: allTags,
+      })
+    })
+    .catch((error) => {
+      this.setState({
+        taggerToast: "Error fetching tags: " + error.message,
       });
     });
   }
