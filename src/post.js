@@ -1,5 +1,6 @@
 import React from 'react';
 import Tag from './tag.js';
+import TagSuggest from './tag-suggest.js';
 
 function renderTags(props) {
   let tagReturn = []
@@ -8,7 +9,7 @@ function renderTags(props) {
       return(<Tag key={t} tag={t} deleteTag={props.deleteTag}/>)
     })
   }
-  // TODO: add new tag input
+  tagReturn.push(<span><TagSuggest allTags={props.allTags}/></span>)
   return tagReturn
 }
 
