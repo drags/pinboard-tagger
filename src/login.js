@@ -48,8 +48,7 @@ class Login extends React.Component {
     return(
       <div className="login">
         <form onSubmit={this.handleSubmit}>
-          <p>
-          </p>
+          <p className="login-toast">{this.state.loginToast}</p>
           <p>
             <label>Username:</label>
             <input name="username" type="text" value={this.props.username} onChange={this.props.handleChange}/>
@@ -59,12 +58,10 @@ class Login extends React.Component {
             <input name="token" type="text" value={this.props.token} onChange={this.props.handleChange}/>
           </p>
           <p>
-            <label></label>
             <input type="submit" value="login" />
           </p>
         </form>
         <br />
-        <span className="login-toast">{this.state.loginToast}</span>
       </div>
     )
   }

@@ -11,8 +11,10 @@ body {
 }
 
 .login {
-    margin: 200px auto;
-    text-align: center;
+    margin: 200px auto 0;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 }
 
 .login-toast {
@@ -20,26 +22,18 @@ body {
 }
 
 .login form {
-    display: table;
     margin: 0 auto;
 }
 
 .login p {
-    display: table-row;
+    display: block;
+    margin: 7px 0;
 }
 
 .login label {
-    display: table-cell;
-    text-align: right;
-}
-
-.login input {
-    display: table-cell;
-}
-
-.post-description {
-    padding: 10px;
-    margin: 10px 0px;
+    min-width: 120px;
+    display: inline-block;
+    padding: 0 10px;
 }
 
 .post {
