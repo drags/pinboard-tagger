@@ -35,6 +35,15 @@ class TagSuggest extends React.Component {
     });
   };
 
+  onSubmit = (event) => {
+    event.preventDefault()
+    this.props.addTag(this.state.value)
+    this.setState({
+      value: "",
+      suggestions: [],
+    })
+  }
+
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
       suggestions: getSuggestions(value, this.props.allTags)
@@ -47,6 +56,15 @@ class TagSuggest extends React.Component {
     });
   };
 
+  onSuggestionSelected = (event, {suggestion, suggestionValue}) => {
+    event.preventDefault()
+    this.props.addTag(suggestionValue)
+    this.setState({
+      value: "",
+      suggestions: [],
+    })
+  }
+
   focusTagInput() {
     this.tagInput.current.input.focus()
   }
@@ -57,7 +75,8 @@ class TagSuggest extends React.Component {
     const inputProps = {
       placeholder: 'Add tag..',
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
+      onSubmit: this.onSubmit,
     };
 
     const keyMap = {
@@ -71,16 +90,20 @@ class TagSuggest extends React.Component {
     return (
       <>
         <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
-        <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={inputProps}
-          theme={theme}
-          ref={this.tagInput}
-        />
+        <form onSubmit={this.onSubmit}>
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            onSuggestionSelected={this.onSuggestionSelected}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            inputProps={inputProps}
+            theme={theme}
+            ref={this.tagInput}
+          />
+          <input type="submit" style={{"display": "none"}} />
+        </form>
       </>
     );
   }

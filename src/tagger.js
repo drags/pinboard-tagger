@@ -116,7 +116,12 @@ class Tagger extends React.Component {
     params.append("tag", tag)
     axios.post('/posts/addTag', params)
       .then((res) => {
-        console.log("Added tag " + tag + " to URL:" + post.Url)
+        const post = this.state.posts[this.state.currentPost]
+        if (Array.isArray(post.Tags)) {
+          post.Tags.push(tag)
+        } else {
+          post.Tags = [tag]
+        }
         this.setState({
           taggerToast: "Added tag: " + tag,
         })
