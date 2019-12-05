@@ -1,5 +1,7 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+import theme from './tag-suggest.module.css';
+import { GlobalHotKeys } from "react-hotkeys";
 
 const getSuggestions = (value, tags) => {
   const val = value.trim().toLowerCase();
@@ -23,6 +25,8 @@ class TagSuggest extends React.Component {
       value: '',
       suggestions: []
     };
+    this.tagInput = React.createRef();
+    this.focusTagInput = this.focusTagInput.bind(this)
   }
 
   onChange = (event, { newValue }) => {
@@ -43,6 +47,10 @@ class TagSuggest extends React.Component {
     });
   };
 
+  focusTagInput() {
+    this.tagInput.current.input.focus()
+  }
+
   render() {
     const { value, suggestions } = this.state;
 
@@ -52,15 +60,28 @@ class TagSuggest extends React.Component {
       onChange: this.onChange
     };
 
+    const keyMap = {
+      TEE: {sequence: "t", action: "keyup"},
+    }
+
+    const handlers = {
+      TEE: this.focusTagInput
+    }
+
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-      />
+      <>
+        <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+          theme={theme}
+          ref={this.tagInput}
+        />
+      </>
     );
   }
 }

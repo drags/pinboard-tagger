@@ -73,6 +73,23 @@ body {
     margin: 0 10px;
 }
 
+.hotkeys-help {
+    padding: 0px 7px;
+    color: #666;
+    margin-top: 20px;
+}
+
+.hotkeys-help h3 {
+    font-family: monospace;
+    margin: 3px 0;
+}
+
+.hotkeys-help ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 5px 0;
+}
+
 .tagger-toast {
     color: #c00;
 }

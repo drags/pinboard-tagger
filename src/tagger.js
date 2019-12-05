@@ -1,7 +1,7 @@
 import React from 'react';
 import Post from './post.js';
 import Controls from './post-controls.js';
-
+import { GlobalHotKeys } from "react-hotkeys";
 
 class Tagger extends React.Component {
   constructor(props) {
@@ -181,6 +181,16 @@ class Tagger extends React.Component {
   }
 
   render() {
+    const keyMap = {
+      LEFTARROW: "ArrowLeft",
+      RIGHTARROW: "ArrowRight",
+    };
+
+    const handlers = {
+      LEFTARROW: this.prevPost,
+      RIGHTARROW: this.nextPost,
+    }
+
     if (!this.state.isLoaded) {
       return(
         <div id="tagger">
@@ -190,6 +200,7 @@ class Tagger extends React.Component {
     }
     return(
       <div id="tagger">
+        <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
         Posts from: <select name="dateSelect" value={this.state.currentDate} onChange={this.handleDateChange}>
           {this.renderDateOptions()}
         </select>
@@ -208,6 +219,14 @@ class Tagger extends React.Component {
           nextPost={this.nextPost}
           prevPost={this.prevPost}
         />
+        <div className="hotkeys-help">
+          <h3>Hotkeys:</h3>
+          <ul>
+            <li>&larr; : Previous Post</li>
+            <li>&rarr; : Next Post</li>
+            <li>t : Focus new tag input</li>
+          </ul>
+        </div>
       </div>
     )
   }
