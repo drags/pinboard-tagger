@@ -15,6 +15,7 @@ class Tagger extends React.Component {
       currentPost: 0,
       currentDate: 0,
       isLoaded: false,
+      renderPost: true,
     }
 
     this.axios = this.props.axios
@@ -137,10 +138,19 @@ class Tagger extends React.Component {
       });
   }
 
+  postHasTags() {
+    let post = this.state.posts[this.state.currentPost]
+    if (post.Tags !== null && post.Tags.length > 0) {
+      return true
+    }
+    return false
+  }
+
   async nextPost() {
     if (this.state.currentPost < (this.state.posts.length - 1)) {
       this.setState({
         currentPost: this.state.currentPost + 1,
+        renderPost: !this.state.untaggedOnly,
       })
     } else {
       let nextDate = this.state.currentDate + 1
@@ -152,7 +162,15 @@ class Tagger extends React.Component {
         posts: posts.data,
         currentDate: nextDate,
         currentPost: 0,
+        renderPost: !this.state.untaggedOnly,
       })
+    }
+    if (!this.state.untaggedOnly || !this.postHasTags()) {
+      this.setState({
+        renderPost: true,
+      })
+    } else {
+      this.nextPost()
     }
   }
 
@@ -160,6 +178,7 @@ class Tagger extends React.Component {
     if (this.state.currentPost > 0) {
       this.setState({
         currentPost: this.state.currentPost - 1,
+        renderPost: !this.state.untaggedOnly,
       })
     } else {
       let prevDate = this.state.currentDate - 1
@@ -171,9 +190,16 @@ class Tagger extends React.Component {
         posts: posts.data,
         currentDate: prevDate,
         currentPost: posts.data.length - 1,
+        renderPost: !this.state.untaggedOnly,
       })
     }
-
+    if (!this.state.untaggedOnly || !this.postHasTags()) {
+      this.setState({
+        renderPost: true,
+      })
+    } else {
+      this.prevPost()
+    }
   }
 
   renderDateOptions() {
@@ -254,6 +280,7 @@ class Tagger extends React.Component {
           addTag={this.addTag}
           allTags={this.state.allTags}
           postUpdated={this.postUpdated}
+          renderPost={this.state.renderPost}
         />
       <div>
         <span className="tagger-toast">{this.state.taggerToast}</span>

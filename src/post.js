@@ -18,6 +18,13 @@ class Post extends React.Component {
     if (this.props.post.Hash !== prevProps.post.Hash) {
       this.props.postUpdated()
     }
+    if (this.props.renderPost !== prevProps.renderPost) {
+      this.props.postUpdated()
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.renderPost
   }
 
   render() {
