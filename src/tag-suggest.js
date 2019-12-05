@@ -55,7 +55,7 @@ class TagSuggest extends React.Component {
     const { value, suggestions } = this.state;
 
     const inputProps = {
-      placeholder: 'Tag...',
+      placeholder: 'Add tag..',
       value,
       onChange: this.onChange
     };

@@ -9,7 +9,7 @@ function renderTags(props) {
       return(<Tag key={t} tag={t} deleteTag={props.deleteTag}/>)
     })
   }
-  tagReturn.push(<span><TagSuggest allTags={props.allTags}/></span>)
+  tagReturn.push(<span><TagSuggest key="tagSuggest" allTags={props.allTags}/></span>)
   return tagReturn
 }
 
