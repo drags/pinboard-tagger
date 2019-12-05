@@ -8,6 +8,11 @@ class Login extends React.Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.usernameInput = React.createRef();
+  }
+
+  componentDidMount() {
+    this.usernameInput.current.focus()
   }
 
   handleSubmit(event) {
@@ -51,7 +56,7 @@ class Login extends React.Component {
           <p className="login-toast">{this.state.loginToast}</p>
           <p>
             <label>Username:</label>
-            <input name="username" type="text" value={this.props.username} onChange={this.props.handleChange}/>
+            <input ref={this.usernameInput} name="username" type="text" value={this.props.username} onChange={this.props.handleChange}/>
           </p>
           <p>
             <label>Token:</label>
