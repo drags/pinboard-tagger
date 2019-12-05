@@ -2,26 +2,34 @@ import React from 'react';
 import Tag from './tag.js';
 import TagSuggest from './tag-suggest.js';
 
-function renderTags(props) {
-  let tagReturn = []
-  if (props.post.Tags !== null) {
-    tagReturn = props.post.Tags.map((t) => {
-      return(<Tag key={t} tag={t} deleteTag={props.deleteTag}/>)
-    })
+class Post extends React.Component {
+  renderTags(props) {
+    let tagReturn = []
+    if (props.post.Tags !== null) {
+      tagReturn = props.post.Tags.map((t) => {
+        return(<Tag key={t} tag={t} deleteTag={props.deleteTag}/>)
+      })
+    }
+    tagReturn.push(<TagSuggest key="tagSuggest" allTags={props.allTags} addTag={props.addTag}/>)
+    return tagReturn
   }
-  tagReturn.push(<TagSuggest key="tagSuggest" allTags={props.allTags}/>)
-  return tagReturn
-}
 
-function Post(props) {
-  return(
-    <div className="post">
-      <div className="post-title"><h3>{props.post.Description}</h3></div>
-      <div className="post-url"><a href={props.post.Url} target="_blank" rel="noopener noreferrer">{props.post.Url}</a></div>
-      <div className="post-description">{props.post.Extended}</div>
-      <div className="post-tags">Tags: {renderTags(props)}</div>
-    </div>
-  );
+  componentDidUpdate(prevProps) {
+    if (this.props.post.Hash !== prevProps.post.Hash) {
+      this.props.postUpdated()
+    }
+  }
+
+  render() {
+    return(
+      <div className="post">
+        <div className="post-title"><h3>{this.props.post.Description}</h3></div>
+        <div className="post-url"><a href={this.props.post.Url} target="_blank" rel="noopener noreferrer">{this.props.post.Url}</a></div>
+        <div className="post-description">{this.props.post.Extended}</div>
+        <div className="post-tags">Tags: {this.renderTags(this.props)}</div>
+      </div>
+    );
+  }
 }
 
 export default Post;

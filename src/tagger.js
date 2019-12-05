@@ -23,6 +23,7 @@ class Tagger extends React.Component {
     this.nextPost = this.nextPost.bind(this)
     this.prevPost = this.prevPost.bind(this)
     this.handleDateChange = this.handleDateChange.bind(this)
+    this.postUpdated = this.postUpdated.bind(this)
   }
 
   async componentDidMount() {
@@ -192,6 +193,12 @@ class Tagger extends React.Component {
     })
   }
 
+  postUpdated() {
+    this.setState({
+      taggerToast: ""
+    })
+  }
+
   render() {
     const keyMap = {
       LEFTARROW: "ArrowLeft",
@@ -221,6 +228,7 @@ class Tagger extends React.Component {
           deleteTag={this.deleteTag}
           addTag={this.addTag}
           allTags={this.state.allTags}
+          postUpdated={this.postUpdated}
         />
       <div>
         <span className="tagger-toast">{this.state.taggerToast}</span>
