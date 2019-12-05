@@ -38,7 +38,6 @@ body {
 .post {
     display: flex;
     flex-direction: column;
-    #background-color: #aa0;
 }
 
 .post a {

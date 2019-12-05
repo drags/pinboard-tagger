@@ -50,7 +50,6 @@ class Tagger extends React.Component {
   }
 
   getPosts(date) {
-    console.log("Getting posts with date", date)
     return this.axios.get('/posts/get?date=' + date)
     .then((res) => {
       res.data.sort((a,b) => {
@@ -72,7 +71,6 @@ class Tagger extends React.Component {
     .then((res) => {
       const tags = res.data
       const allTags = tags.map(x => x.Tag)
-      console.log("Got a list of tags", allTags)
       this.setState({
         allTags: allTags,
       })
@@ -92,8 +90,6 @@ class Tagger extends React.Component {
     params.append("tag", tag)
     axios.post('/posts/deleteTag', params)
       .then((res) => {
-        console.log("Deleted tag " + tag + " from URL:" + post.Url)
-
         const posts = this.state.posts
 
         // Delete tag from local state
@@ -105,7 +101,7 @@ class Tagger extends React.Component {
         })
       })
       .catch((error) => {
-        console.log("Error deleting tag " + tag + " from URL:" + post.Url + ". Error:" + error.message)
+        console.debug("Error deleting tag " + tag + " from URL:" + post.Url + ". Error:" + error.message)
         this.setState({
           taggerToast: "Failed to delete tag: " + tag,
         })
@@ -131,7 +127,7 @@ class Tagger extends React.Component {
         })
       })
       .catch((error) => {
-        console.log("Error adding tag " + tag + " to URL:" + post.Url + ". Error:" + error.message)
+        console.debug("Error adding tag " + tag + " to URL:" + post.Url + ". Error:" + error.message)
         this.setState({
           taggerToast: "Failed to add tag: " + tag,
         })
@@ -211,7 +207,6 @@ class Tagger extends React.Component {
   }
 
   async handleDateChange(event) {
-    console.log("handling date change", event.target.value)
     const dateIndex = event.target.value
     const posts = await this.getPosts(this.state.postDates[dateIndex].Date)
     this.setState({
