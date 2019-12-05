@@ -24,6 +24,7 @@ class Tagger extends React.Component {
     this.prevPost = this.prevPost.bind(this)
     this.handleDateChange = this.handleDateChange.bind(this)
     this.postUpdated = this.postUpdated.bind(this)
+    this.openLink = this.openLink.bind(this)
   }
 
   async componentDidMount() {
@@ -199,15 +200,23 @@ class Tagger extends React.Component {
     })
   }
 
+  openLink() {
+    const post = this.state.posts[this.state.currentPost]
+    const link = post.Url
+    window.open(link, "_blank")
+  }
+
   render() {
     const keyMap = {
       LEFTARROW: "ArrowLeft",
       RIGHTARROW: "ArrowRight",
+      GEE: "g",
     };
 
     const handlers = {
       LEFTARROW: this.prevPost,
       RIGHTARROW: this.nextPost,
+      GEE: this.openLink,
     }
 
     if (!this.state.isLoaded) {
@@ -243,6 +252,7 @@ class Tagger extends React.Component {
             <li>&larr; : Previous Post</li>
             <li>&rarr; : Next Post</li>
             <li>t : Focus new tag input</li>
+            <li>g : Open link in new tab</li>
           </ul>
         </div>
       </div>
