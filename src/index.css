@@ -1,13 +1,12 @@
 body {
-    font-family: helvetica;
-    color: #070;
+    font-family: "Gill Sans", sans-serif;
+    color: #111;
 }
 
 .container {
     width: 900px;
     margin: 20px auto 0;
     padding: 20px;
-    height: 600px;
 }
 
 .login {
@@ -37,28 +36,53 @@ body {
 }
 
 .post {
-    height: 200px;
+    display: flex;
+    flex-direction: column;
+    #background-color: #aa0;
 }
 
 .post a {
-    font-family: courier;
+    font-family: "Courier New", monospace;
     font-size: 14px;
 }
 
+.post-description {
+    margin: 10px 0px;
+    overflow: scroll;
+    min-height: 100px;
+    max-height: 300px;
+}
+
+.post-tags {
+    margin: 10px;
+    display: flex;
+    align-items: flex-start;
+    height: 30px;
+}
+
 .post-tag {
-    margin: 10px 5px;
-    padding: 5px 7px;
+    margin: 0 5px;
+    padding: 1px 5px;
     color: #333;
     background-color: #ddd;
-    font-weight: bold;
+    border-radius: 4px;
 }
 
 .post-tag button {
-    padding: 1px;
+    font-size: 1em;
+    color: #f40;
+    padding: 2px;
+    background-color: inherit;
+    border-radius: 4px;
+    border: 0;
+    cursor: pointer;
 }
 
 .post-controls {
     padding: 10px;
+    display: flex;
+    margin: 0 20px;
+    justify-content: space-between;
 }
 
 .post-controls button {
@@ -92,4 +116,5 @@ body {
 
 .tagger-toast {
     color: #c00;
+    padding: 10px;
 }

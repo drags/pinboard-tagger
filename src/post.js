@@ -9,17 +9,17 @@ function renderTags(props) {
       return(<Tag key={t} tag={t} deleteTag={props.deleteTag}/>)
     })
   }
-  tagReturn.push(<span><TagSuggest key="tagSuggest" allTags={props.allTags}/></span>)
+  tagReturn.push(<TagSuggest key="tagSuggest" allTags={props.allTags}/>)
   return tagReturn
 }
 
 function Post(props) {
   return(
     <div className="post">
-      <h3>{props.post.Description}</h3>
-      <p><a href={props.post.Url} target="_blank" rel="noopener noreferrer">{props.post.Url}</a></p>
-      <p className="post-description">{props.post.Extended}</p>
-      <p>Tags: {renderTags(props)}</p>
+      <div className="post-title"><h3>{props.post.Description}</h3></div>
+      <div className="post-url"><a href={props.post.Url} target="_blank" rel="noopener noreferrer">{props.post.Url}</a></div>
+      <div className="post-description">{props.post.Extended}</div>
+      <div className="post-tags">Tags: {renderTags(props)}</div>
     </div>
   );
 }

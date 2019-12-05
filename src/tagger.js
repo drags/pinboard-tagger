@@ -210,11 +210,9 @@ class Tagger extends React.Component {
           addTag={this.addTag}
           allTags={this.state.allTags}
         />
-      <br />
       <div>
         <span className="tagger-toast">{this.state.taggerToast}</span>
       </div>
-      <br />
         <Controls
           nextPost={this.nextPost}
           prevPost={this.prevPost}
