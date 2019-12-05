@@ -27,7 +27,6 @@ class Tagger extends React.Component {
 
   async componentDidMount() {
     const postDates = await this.getPostDates()
-    postDates.data.reverse()
     const posts = await this.getPosts(postDates.data[0].Date)
     this.setState({
       postDates: postDates.data,
@@ -49,6 +48,14 @@ class Tagger extends React.Component {
   getPosts(date) {
     console.log("Getting posts with date", date)
     return this.axios.get('/posts/get?date=' + date)
+    .then((res) => {
+      res.data.sort((a,b) => {
+        const dateA = Date.parse(a.Date)
+        const dateB = Date.parse(b.Date)
+        return dateB - dateA
+      })
+      return res
+    })
     .catch((error) => {
       this.setState({
         taggerToast: "Error fetching posts: " + error.message,
@@ -162,7 +169,7 @@ class Tagger extends React.Component {
   }
 
   renderDateOptions() {
-    const postDates = this.state.postDates.reverse()
+    const postDates = this.state.postDates
     const dateOptions = postDates.map((pd, i) => {
       return(<option key={i} value={i}>{pd.Date}</option>)
     })
