@@ -23,6 +23,7 @@ class Tagger extends React.Component {
     this.nextPost = this.nextPost.bind(this)
     this.prevPost = this.prevPost.bind(this)
     this.handleDateChange = this.handleDateChange.bind(this)
+    this.handleUntaggedCheckbox = this.handleUntaggedCheckbox.bind(this)
     this.postUpdated = this.postUpdated.bind(this)
     this.openLink = this.openLink.bind(this)
   }
@@ -194,6 +195,12 @@ class Tagger extends React.Component {
     })
   }
 
+  handleUntaggedCheckbox(event) {
+    this.setState({
+      untaggedOnly: event.target.checked,
+    })
+  }
+
   postUpdated() {
     this.setState({
       taggerToast: ""
@@ -227,11 +234,20 @@ class Tagger extends React.Component {
       )
     }
     return(
-      <div id="tagger">
+      <div className="tagger">
         <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
-        Posts from: <select name="dateSelect" value={this.state.currentDate} onChange={this.handleDateChange}>
-          {this.renderDateOptions()}
-        </select>
+        <div className="tagger-header">
+          <span>
+            <label>Posts from:</label>
+            <select name="dateSelect" value={this.state.currentDate} onChange={this.handleDateChange}>
+              {this.renderDateOptions()}
+            </select>
+          </span>
+          <span>
+            <label>Show only untagged posts:</label>
+            <input type="checkbox" checked={this.state.onlyUntaggedPosts} onChange={this.handleUntaggedCheckbox} />
+          </span>
+        </div>
         <Post
           post={this.state.posts[this.state.currentPost]}
           deleteTag={this.deleteTag}

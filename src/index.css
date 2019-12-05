@@ -114,6 +114,11 @@ body {
     margin: 5px 0;
 }
 
+.tagger-header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .tagger-toast {
     color: #c00;
     padding: 10px;
